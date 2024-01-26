@@ -1,0 +1,5 @@
+# Ignore Composer files
+/vendor/
+
+# Ignore Node.js modules
+/node_modules/

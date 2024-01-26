@@ -1,0 +1,37 @@
+.author-container {
+	width: 60%;
+	margin: 50px auto;
+
+	.author-image {
+		width: 250px;
+		height: 250px;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.author-about {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		.author-description {
+			width: 60%;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.author-container {
+		width: 90%;
+		margin: 50px auto;
+
+		.author-about {
+			flex-direction: column;
+
+			.author-description {
+				width: 100%;
+			}
+		}
+	}
+}

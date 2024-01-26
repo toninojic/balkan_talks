@@ -1,0 +1,23 @@
+{
+  "name": "balkantalkstheme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "grunt": "grunt"
+  },
+  "keywords": [],
+  "author": "Nojic Antonije",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-contrib-sass": "^2.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0"
+  },
+  "dependencies": {
+    "node-sass": "^9.0.0",
+    "sass": "^1.69.7"
+  }
+}

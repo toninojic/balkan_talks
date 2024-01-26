@@ -1,0 +1,9 @@
+{
+    "name": "nojicantonije/balkan_talks",
+    "autoload": {
+        "psr-4": {
+            "BalkanTalks\\": "src/"
+        }
+    },
+    "require": {}
+}

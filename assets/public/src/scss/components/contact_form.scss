@@ -1,0 +1,50 @@
+.custom-contact-form {
+	max-width: 400px;
+
+	p {
+		label {
+			display: block;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		textarea {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: $border-radius;
+			box-sizing: border-box;
+		}
+
+		textarea {
+			resize: vertical;
+		}
+
+		input[type="submit"] {
+			background-color: $success;
+			color: $white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: $border-radius;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $success;
+			}
+		}
+
+		.has-spinner {
+			position: relative;
+
+			.wpcf7-spinner {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				display: none;
+			}
+		}
+	}
+}
