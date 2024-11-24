@@ -10,6 +10,7 @@ class ThemeSupportController
 
     public function __construct() {
         add_action('after_setup_theme', [$this, 'registerThemeSupport'], 10);
+        add_action('widgets_init', [$this, 'registeringSidebar']);
     }
 
     public function registerThemeSupport() {
@@ -60,6 +61,9 @@ class ThemeSupportController
         // Enable custom logo
         add_theme_support( 'custom-logo' );
 
+        // Enable widgets
+        add_theme_support( 'widgets');
+
         // Enable HTML5 features
         add_theme_support( 'html5', array(
             'search-form',
@@ -72,6 +76,18 @@ class ThemeSupportController
         // Register primary navigation menu
         register_nav_menus( array(
             'primary_menu' => __( 'Primary Menu', 'balkan_talks' ),
+        ) );
+    }
+
+    public function registeringSidebar() {
+        register_sidebar( array(
+            'name'          => __( 'Primary Sidebar', 'balkan_talks' ),
+            'id'            => 'primary-sidebar',
+            'description'   => __( 'Main sidebar that appears on the right.', 'balkan_talks' ),
+            'before_widget' => '',
+            'after_widget'  => '',
+            'before_title'  => '<h2 class="widget-title">',
+            'after_title'   => '</h2>',
         ) );
     }
 }

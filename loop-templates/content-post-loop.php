@@ -9,7 +9,6 @@
         <a href="<?php echo esc_url(get_permalink()); ?>">
             <h3><?php the_title(); ?></h3>
         </a>
-        <p class="post-card-date"><?php echo get_the_time('d. M. Y.'); ?></p>
         <p class="post-card-content"><?php echo wp_strip_all_tags(strip_shortcodes(get_the_content())); ?></p>
     </div>
 </div>

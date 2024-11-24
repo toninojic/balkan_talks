@@ -9,23 +9,31 @@ get_header(); ?>
     <main id="main-content" class="site-main">
         <div class="site-content">
             <div class="container">
-                <?php
-                while (have_posts()) :
-                    the_post();
-                    ?>
-                    <article id="post-<?php the_ID(); ?>" <?php post_class('page-article'); ?>>
-                        <header class="entry-header">
-                            <h1 class="entry-title"><?php the_title(); ?></h1>
-                        </header><!-- .entry-header -->
+                <div class="content-area">
+                    <?php
+                    while (have_posts()) :
+                        the_post();
+                        ?>
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('post-article'); ?>>
+                            <header class="entry-header">
+                                <h1 class="entry-title"><?php the_title(); ?></h1>
+                            </header><!-- .entry-header -->
 
-                        <div class="entry-content">
-                            <?php the_content(); ?>
-                        </div><!-- .entry-content -->
+                            <div class="entry-content">
+                                <?php the_content(); ?>
+                            </div><!-- .entry-content -->
 
-                    </article><!-- #post-<?php the_ID(); ?> -->
+                        </article><!-- #post-<?php the_ID(); ?> -->
 
-                <?php endwhile;?>
-            </div><!-- .page-container -->
+                        <aside class="sidebar">
+                            <?php if (is_active_sidebar('primary-sidebar')) : ?>
+                                <?php dynamic_sidebar('primary-sidebar'); ?>
+                            <?php endif; ?>
+                        </aside><!-- .sidebar -->
+
+                    <?php endwhile;?>
+                </div><!-- .content-area -->
+            </div><!-- .post-container -->
         </div><!-- .site-content -->
     </main><!-- #main -->
 

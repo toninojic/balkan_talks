@@ -3,3 +3,6 @@
 
 # Ignore Node.js modules
 /node_modules/
+
+# Ignore error_log
+error_log
