@@ -25,11 +25,13 @@ get_header(); ?>
 
                         </article><!-- #post-<?php the_ID(); ?> -->
 
-                        <aside class="sidebar">
-                            <?php if (is_active_sidebar('primary-sidebar')) : ?>
-                                <?php dynamic_sidebar('primary-sidebar'); ?>
-                            <?php endif; ?>
-                        </aside><!-- .sidebar -->
+                        <?php if (!in_array(get_the_ID(), [52, 54])) : ?>
+                            <aside class="sidebar">
+                                    <?php if (is_active_sidebar('primary-sidebar')) : ?>
+                                        <?php dynamic_sidebar('primary-sidebar'); ?>
+                                    <?php endif; ?>
+                            </aside><!-- .sidebar -->
+                        <?php endif; ?>
 
                     <?php endwhile;?>
                 </div><!-- .content-area -->

@@ -89,5 +89,15 @@ class ThemeSupportController
             'before_title'  => '<h2 class="widget-title">',
             'after_title'   => '</h2>',
         ) );
+
+        register_sidebar( array(
+            'name'          => __( 'Social Links', 'balkan_talks' ),
+            'id'            => 'social-links',
+            'description'   => __( 'Social Links sidebar.', 'balkan_talks' ),
+            'before_widget' => '',
+            'after_widget'  => '',
+            'before_title'  => '<div class="social-links">',
+            'after_title'   => '</div>',
+        ) );
     }
 }

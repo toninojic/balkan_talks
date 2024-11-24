@@ -8,12 +8,13 @@
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
+		border-radius: 10px;
 	}
 
 	.author-about {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: 50px;
 
 		.author-description {
 			width: 60%;
@@ -27,6 +28,7 @@
 		margin: 50px auto;
 
 		.author-about {
+			gap: 10px;
 			flex-direction: column;
 
 			.author-description {

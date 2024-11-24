@@ -5,6 +5,7 @@ namespace BalkanTalks;
 use BalkanTalks\Controllers\LoadMore;
 use BalkanTalks\Controllers\ThemeSupportController;
 use BalkanTalks\Controllers\Enqueue;
+use BalkanTalks\Controllers\CustomHooks;
 use BalkanTalks\Controllers\Redirections;
 use BalkanTalks\Modals\UserMetaFields;
 use BalkanTalks\Shortcodes\PostsLoop;
@@ -22,6 +23,7 @@ class MainLoader
 
         ThemeSupportController::getInstance();
         Enqueue::getInstance();
+        CustomHooks::getInstance();
         Redirections::getInstance();
         UserMetaFields::getInstance();
         LoadMore::getInstance();
