@@ -1,8 +1,18 @@
 .user-profiles-accordion {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: start;
 	margin: 25px auto;
+	gap: 26px;
+
+	@media screen and (max-width: 768px) {
+		gap: 0;
+		justify-content: space-between;
+	}
+
+	@media screen and (max-width: 480px) {
+		justify-content: center !important;
+	}
 
 	.user-profile {
 		border-radius: $border-radius;
