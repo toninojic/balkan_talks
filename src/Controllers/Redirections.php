@@ -9,7 +9,7 @@ class Redirections
     use SingletonTrait;
 
     public function __construct() {
-        add_action('template_redirect', [$this, 'customAboutPageRedirect']);
+        //add_action('template_redirect', [$this, 'customAboutPageRedirect']);
     }
 
     public function customAboutPageRedirect() {

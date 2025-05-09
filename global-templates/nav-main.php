@@ -29,4 +29,8 @@
 </header>
 
 
-<?php yoast_breadcrumb('<nav id="breadcrumbs"><div class="container">', '<div></div></nav>'); ?>
+<?php 
+if ( ! is_front_page() ) {
+    yoast_breadcrumb('<nav id="breadcrumbs"><div class="container">', '<div></div></nav>');
+}
+?>

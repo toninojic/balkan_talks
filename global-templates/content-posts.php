@@ -1,6 +1,7 @@
 <?php
 $query = $args['query'];
 $categorySlug =  $args['cat'];
+$tagSlug = $args['tag'];
 
 ?>
 <div class="post-wrapper">
@@ -13,6 +14,16 @@ $categorySlug =  $args['cat'];
     </div>
 
     <?php if ($query->found_posts > 6): ?>
-        <button class="load-more-btn" id="load-more-button" data-offset="6" data-category="<?php echo $categorySlug; ?>">Load More</button>
+        <button class="load-more-btn" id="load-more-button"
+            data-offset="6"
+            <?php if (!empty($categorySlug)) : ?>
+                data-category="<?php echo esc_attr($categorySlug); ?>"
+            <?php endif; ?>
+            <?php if (!empty($tagSlug)) : ?>
+                data-tag="<?php echo esc_attr($tagSlug); ?>"
+            <?php endif; ?>
+        >
+            Load More
+        </button>
     <?php endif; ?>
 </div>

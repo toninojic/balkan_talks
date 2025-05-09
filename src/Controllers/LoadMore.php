@@ -11,22 +11,27 @@ class LoadMore
 
     public function __construct() {
         add_action('wp_ajax_load_more_posts', [$this, 'loadMorePosts']);
-        add_action('wp_ajax_nopriv_load_more_posts',  [$this, 'loadMorePosts']);
+        add_action('wp_ajax_nopriv_load_more_posts', [$this, 'loadMorePosts']);
     }
 
     public function loadMorePosts() {
-        //check_ajax_referer('load_more_posts_nonce', 'security');
+        // check_ajax_referer('load_more_posts_nonce', 'security');
 
-        $offset = $_POST['offset'];
-        $category = $_POST['category'];
+        $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+        $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+        $tag = isset($_POST['tag']) ? sanitize_text_field($_POST['tag']) : '';
 
-        $args = array(
+        $args = [
             'offset' => $offset,
-            'order'   => 'DESC',
+            'order' => 'DESC',
             'posts_per_page' => 6,
-        );
+            'post_status' => 'publish',
+            'post_type' => 'post',
+        ];
 
-        if (!empty($category) && $category !== 'uncategorized') {
+        if ($tag !== 'null') {
+            $args['tag'] = $tag;
+        } elseif (!empty($category) && $category !== 'uncategorized') {
             $args['category_name'] = $category;
         }
 

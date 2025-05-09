@@ -12,16 +12,20 @@ class PostsLoop
     public function displayCategoryLoop($atts) {
         $atts = shortcode_atts([
             'category' => '',
+            'tag' => '',
         ], $atts, 'custom_category_loop');
 
-        $args = array(
+        $args = [
+            'post_type' => 'post',
             'order' => 'DESC',
             'offset' => 0,
-            'posts_per_page' => 6
-        );
+            'posts_per_page' => 6,
+        ];
 
-        if (!empty($atts['category']) && $atts['category'] !== 'uncategorized') {
-            $args['category_name'] = $atts['category'];
+        if (!empty($atts['tag'])) {
+            $args['tag'] = sanitize_title($atts['tag']);
+        } elseif (!empty($atts['category']) && $atts['category'] !== 'uncategorized') {
+            $args['category_name'] = sanitize_title($atts['category']);
         }
 
         $postsLoopContent = '';
@@ -30,7 +34,11 @@ class PostsLoop
 
         if ($query->have_posts()) {
             ob_start();
-            get_template_part('global-templates/content', 'posts', ['query' => $query, 'cat' => $atts['category']]);
+            get_template_part('global-templates/content', 'posts', [
+                'query' => $query,
+                'cat' => $atts['category'],
+                'tag' => $atts['tag'],
+            ]);
             wp_reset_postdata();
             $postsLoopContent = ob_get_clean();
         }

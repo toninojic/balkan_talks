@@ -23,6 +23,23 @@ get_header(); ?>
                                 <?php the_content(); ?>
                             </div><!-- .entry-content -->
 
+                            <?php 
+                            $post_tags = get_the_tags();
+                            if ($post_tags) : ?>
+                                <div class="post-tags">
+                                    <h4>Tags:</h4>
+                                    <ul>
+                                        <?php foreach ($post_tags as $tag) : ?>
+                                            <li>
+                                                <a href="<?php echo get_tag_link($tag->term_id); ?>">
+                                                    <?php echo esc_html($tag->name); ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+
                         </article><!-- #post-<?php the_ID(); ?> -->
 
                         <?php if (!in_array(get_the_ID(), [52, 54])) : ?>
