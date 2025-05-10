@@ -3,6 +3,13 @@
  * Template Name: Single Post Template
  */
 
+
+$is_resources = has_category('resources');
+$article_classes = ['post-article'];
+if ($is_resources) {
+    $article_classes[] = 'is-resources';
+}
+
 get_header(); ?>
 
 <div class="site-container">
@@ -14,12 +21,19 @@ get_header(); ?>
                     while (have_posts()) :
                         the_post();
                         ?>
-                        <article id="post-<?php the_ID(); ?>" <?php post_class('post-article'); ?>>
+                        <article id="post-<?php the_ID(); ?>" <?php post_class($article_classes); ?>>
                             <header class="entry-header">
                                 <h1 class="entry-title"><?php the_title(); ?></h1>
                             </header><!-- .entry-header -->
 
-                            <div class="entry-content">
+                            <?php if ($is_resources): ?>
+                                <div class="in-content-search-wrapper">
+                                    <label for="in-content-search">Search in content:</label>
+                                    <input type="text" id="in-content-search" class="in-content-search" placeholder="Type to search...">
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="entry-content" <?php echo $is_resources ? ' id="searchable-content"' : ''; ?>>
                                 <?php the_content(); ?>
                             </div><!-- .entry-content -->
 
@@ -42,7 +56,7 @@ get_header(); ?>
 
                         </article><!-- #post-<?php the_ID(); ?> -->
 
-                        <?php if (!in_array(get_the_ID(), [52, 54])) : ?>
+                        <?php if (!in_array(get_the_ID(), [52, 54]) && !$is_resources) : ?>
                             <aside class="sidebar">
                                     <?php if (is_active_sidebar('primary-sidebar')) : ?>
                                         <?php dynamic_sidebar('primary-sidebar'); ?>
