@@ -1,0 +1,151 @@
+.comments-area {
+    max-width: 800px;
+    margin: 2rem auto;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+
+    @media screen and (max-width: 768px) {
+        padding: 0.5rem;
+	}
+
+    h2.comments-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        color: #111;
+    }
+
+    .comment-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .comment {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            border-left: 2px solid #eee;
+            padding-left: 1rem;
+            flex-direction: column;
+
+            .comment-body {
+                width: 100%;
+
+                .comment-author {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    font-weight: 700;
+                    color: #222;
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .says {
+                        display: none;
+                    }
+                }
+
+                .comment-meta {
+                    font-size: 0.85rem;
+                    margin-bottom: 0.5rem;
+                    display: block;
+                    background: transparent;
+                    padding: 0;
+                }
+
+                .comment-content {
+                    font-size: 1rem;
+                    color: #333;
+                    line-height: 1.6;
+                    margin-bottom: 0.5rem;
+                }
+
+                .reply {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    font-size: 0.875rem;
+
+                    a {
+                        color: $color-1;
+                        text-decoration: none;
+                    }
+                }
+                
+                .comment-edit-link {
+                    margin-left: 0.4rem;
+                }
+            }
+
+            ul.children {
+                margin-top: 1.5rem;
+                margin-left: 2rem;
+            }
+
+
+        }
+    }
+
+    #respond {
+        margin-top: 3rem;
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin: 0.5rem 0;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="url"],
+            textarea {
+                padding: 0.75rem 1rem;
+                border: 1px solid #ddd;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+                width: 100%;
+                box-sizing: border-box;
+
+                &:focus {
+                    border-color: $color-1;
+                    outline: none;
+                }
+            }
+
+            textarea {
+                min-height: 120px;
+                resize: vertical;
+            }
+
+            .form-submit input[type="submit"] {
+                background: #0073aa;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                border-radius: 0.5rem;
+                cursor: pointer;
+                transition: background 0.3s ease;
+
+                &:hover {
+                    background: #005f8d;
+                }
+            }
+        }
+    }
+}

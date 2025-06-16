@@ -54,6 +54,12 @@ get_header(); ?>
                                 </div>
                             <?php endif; ?>
 
+                            <?php 
+                                if (comments_open() || get_comments_number()) :
+                                    comments_template();
+                                endif;
+                            ?>
+
                         </article><!-- #post-<?php the_ID(); ?> -->
 
                         <?php if (!in_array(get_the_ID(), [52, 54]) && !$is_resources) : ?>
