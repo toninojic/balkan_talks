@@ -14,9 +14,16 @@ class PostsLoop
             'category' => '',
             'tag' => '',
             'posts_per_page' => 6,
+            'layout' => 'default',
         ], $atts, 'custom_category_loop');
 
         $postsPerPage = intval($atts['posts_per_page']);
+        $layout = sanitize_key($atts['layout']);
+        $allowedLayouts = ['default', 'swiper', 'featured', 'stacked'];
+
+        if (!in_array($layout, $allowedLayouts, true)) {
+            $layout = 'default';
+        }
 
         $args = [
             'post_type' => 'post',
@@ -42,6 +49,7 @@ class PostsLoop
                 'cat' => $atts['category'],
                 'tag' => $atts['tag'],
                 'posts_per_page' => $postsPerPage,
+                'layout' => $layout,
             ]);
             wp_reset_postdata();
             $postsLoopContent = ob_get_clean();

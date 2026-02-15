@@ -21,6 +21,12 @@ class LoadMore
         $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
         $tag = isset($_POST['tag']) ? sanitize_text_field($_POST['tag']) : '';
         $postsPerPage = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 6;
+        $layout = isset($_POST['layout']) ? sanitize_key($_POST['layout']) : 'default';
+        $allowedLayouts = ['default', 'swiper', 'featured', 'stacked'];
+
+        if (!in_array($layout, $allowedLayouts, true)) {
+            $layout = 'default';
+        }
 
         $args = [
             'offset' => $offset,
@@ -43,7 +49,13 @@ class LoadMore
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                get_template_part('loop-templates/content', 'post-loop');
+                if ($layout === 'featured') {
+                    echo '<div class="post-card-slot is-secondary">';
+                    get_template_part('loop-templates/content', 'post-loop');
+                    echo '</div>';
+                } else {
+                    get_template_part('loop-templates/content', 'post-loop');
+                }
             }
             wp_reset_postdata();
         }
