@@ -5,6 +5,9 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	background: linear-gradient(180deg, #fff 0%, #fbf7ef 100%);
+	color: #2f2437;
+	scroll-behavior: smooth;
 
 	p {
 		line-height: 1.5;
@@ -14,6 +17,10 @@ body {
 			font-size: 16px;
 		}
 	}
+}
+
+* {
+	box-sizing: border-box;
 }
 
 // color variables
@@ -35,6 +42,20 @@ main {
 	background-color: $color-5;
 }
 
+::selection {
+	background: rgba(255, 76, 5, 0.2);
+	color: $color-2;
+}
+
+a,
+button,
+input,
+textarea,
+.post-card,
+.post-card-img-link img {
+	transition: all 0.28s ease;
+}
+
 .custom-contact-form input[type="submit"] {
 	background-color: $color-4 !important;
 	color: $color-5 !important;
@@ -50,19 +71,30 @@ main {
 }
 
 .load-more-btn {
-	padding: 8px 12px;
-	background-color: $color-4;
+	padding: 11px 18px;
+	background: linear-gradient(135deg, #2a6e00 0%, #1c4a00 100%);
 	color: $white;
 	text-transform: uppercase;
 	border: none;
-	border-radius: $border-radius;
-	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	letter-spacing: .08em;
+	border-radius: 999px;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 	margin-top: 25px;
 
 	&:hover {
 		cursor: pointer;
-		background-color: #173506;
-		box-shadow: 7px 7px 2px 1px rgba(0, 0, 0, 0.071);
+		transform: translateY(-2px);
+		box-shadow: 0 14px 30px rgba(23, 53, 6, 0.22);
+	}
+}
+
+.post-card {
+	opacity: 0;
+	transform: translateY(16px);
+
+	&.is-visible {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
