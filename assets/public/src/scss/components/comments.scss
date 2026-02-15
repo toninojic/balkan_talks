@@ -147,3 +147,82 @@
         }
     }
 }
+
+/* Modern comments redesign */
+.comments-area {
+	background: $white;
+	border: 1px solid rgba(71, 46, 87, 0.12);
+	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.09);
+
+	h2.comments-title {
+		font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+		margin-bottom: 1.4rem;
+	}
+
+	.comment-list {
+		.comment {
+			border-left: none;
+			padding: 14px;
+			border-radius: 14px;
+			background: #faf7f2;
+			box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+
+			.comment-body {
+				.comment-author {
+					font-size: 1rem;
+
+					img {
+						width: 48px;
+						height: 48px;
+						border: 2px solid rgba(71, 46, 87, 0.25);
+					}
+				}
+
+				.comment-meta {
+					font-size: 0.78rem;
+					text-transform: uppercase;
+					letter-spacing: 0.04em;
+					color: rgba(0, 0, 0, 0.56);
+				}
+
+				.comment-content {
+					font-size: 0.98rem;
+					line-height: 1.7;
+				}
+
+				.reply a {
+					display: inline-flex;
+					padding: 4px 12px;
+					border-radius: 999px;
+					background: rgba(28, 74, 0, 0.1);
+					font-weight: 700;
+				}
+			}
+		}
+	}
+
+	#respond {
+		margin-top: 24px;
+		padding: 18px;
+		border-radius: 14px;
+		background: #faf7f2;
+
+		form {
+			input[type="text"],
+			input[type="email"],
+			input[type="url"],
+			textarea {
+				border: 1px solid rgba(71, 46, 87, 0.18);
+				border-radius: 10px;
+				background: $white;
+			}
+
+			.form-submit input[type="submit"] {
+				background: linear-gradient(135deg, #472e57 0%, #1c4a00 100%);
+				border-radius: 999px;
+				font-weight: 700;
+				letter-spacing: 0.03em;
+			}
+		}
+	}
+}
