@@ -3,60 +3,90 @@
 }
 
 .post-wrapper {
-	margin: 25px auto;
+	margin: 30px auto;
 
 	.post-container {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: start;
-		gap: 30px;
+		gap: 28px;
 
 		@media screen and (max-width: 480px) {
 			justify-content: center;
-			gap: 0;
+			gap: 16px;
 		}
 
 		.post-card {
-			width: calc(33.33% - 20px);
-			height: 450px;
-			margin-bottom: 20px;
+			width: calc(33.33% - 19px);
+			height: 460px;
+			margin-bottom: 0;
 			position: relative;
 			display: flex;
 			flex-direction: column;
-			background-color: $color-5;
+			background: #fff;
 			overflow: hidden;
-			box-shadow: 0 10px 40px rgba(0, 0, 0, .3);
+			border-radius: 14px;
+			border: 1px solid rgba(0, 0, 0, 0.08);
+			box-shadow: 0 16px 40px rgba(0, 0, 0, .08);
+			transition: transform .25s ease, box-shadow .25s ease;
+
+			&:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 22px 45px rgba(0, 0, 0, .14);
+			}
 
 			@media screen and (max-width: 1200px) {
-				height: 400px;
+				height: 420px;
 			}
 
 			@media screen and (max-width: 768px) {
-				width: calc(50% - 20px);
+				width: calc(50% - 14px);
 			}
 
 			@media screen and (max-width: 480px) {
-				width: calc(100% - 20px);
+				width: 100%;
+				height: auto;
 			}
 
 			&-description {
-				padding: 10px;
+				padding: 14px;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
 
 				h3 {
 					color: $color-2;
-					margin: 0 0 5px;
-					line-height: 1.3;
+					margin: 0;
+					line-height: 1.28;
+					font-size: 30px;
+
+					@media screen and (max-width: 1200px) {
+						font-size: 24px;
+					}
+				}
+
+				.post-card-title-link {
+					text-decoration: none;
+				}
+
+				.post-card-meta,
+				.post-card-author {
+					font-size: 12px;
+					letter-spacing: .08em;
+					text-transform: uppercase;
+					color: rgba(0, 0, 0, 0.55);
+					font-weight: 600;
 				}
 
 				p {
-					margin: 0 0 5px;
-					color: $black;
+					margin: 0;
+					color: rgba(0, 0, 0, 0.78);
 					display: -webkit-box;
-					-webkit-line-clamp: 4;
+					-webkit-line-clamp: 3;
 					-webkit-box-orient: vertical;
 					overflow: hidden;
 					text-overflow: ellipsis;
-					line-height: 1.3;
+					line-height: 1.45;
 					font-size: 16px;
 				}
 			}
@@ -67,23 +97,22 @@
 				&-link {
 					display: block;
 					width: 100%;
-					height: 260px;
+					height: 250px;
 					overflow: hidden;
 					transition: .5s;
 
+					@media screen and (max-width: 1200px) {
+						height: 210px;
+					}
+
 					&:hover {
 						&::before {
-							background: rgba(0,0,0,0.1);
+							background: rgba(0, 0, 0, 0.08);
 						}
 
 						img {
-							transform: scale(1.1);
-							transition: .5s;
+							transform: scale(1.08);
 						}
-					}
-
-					@media screen and (max-width: 1200px) {
-						height: 200px;
 					}
 
 					&::before {
@@ -93,12 +122,14 @@
 						position: absolute;
 						width: 100%;
 						height: 100%;
-						background: rgba(0,0,0,0.3);
+						background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.1) 100%);
 					}
 
 					img {
 						width: 100%;
 						height: 100%;
+						object-fit: cover;
+						transition: .45s;
 					}
 				}
 			}
@@ -110,10 +141,9 @@
 			.post-card {
 				width: 100%;
 				height: auto;
-				margin-bottom: 0;
 
 				.post-card-img-link {
-					height: 320px;
+					height: 360px;
 				}
 			}
 		}
@@ -121,32 +151,62 @@
 
 	&--featured {
 		.post-container {
+			display: block;
+		}
+
+		.featured-hero {
 			display: grid;
-			grid-template-columns: 2fr 1fr;
-			gap: 30px;
+			grid-template-columns: 1fr 2fr 1fr;
+			gap: 24px;
+			align-items: stretch;
 
 			@media screen and (max-width: 992px) {
 				grid-template-columns: 1fr;
 			}
 		}
 
-		.post-card-slot {
-			&.is-featured .post-card {
+		.featured-side,
+		.featured-main {
+			.post-card {
 				width: 100%;
-				height: 620px;
+			}
+		}
+
+		.featured-side {
+			.post-card {
+				height: 100%;
+				min-height: 470px;
 
 				.post-card-img-link {
-					height: 360px;
+					height: 250px;
 				}
 			}
+		}
 
-			&.is-secondary .post-card {
-				width: 100%;
-				height: 295px;
+		.featured-main {
+			.post-card {
+				height: 100%;
+				min-height: 620px;
 
 				.post-card-img-link {
-					height: 170px;
+					height: 420px;
 				}
+			}
+		}
+
+		.featured-more {
+			margin-top: 28px;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 24px;
+
+			@media screen and (max-width: 992px) {
+				grid-template-columns: 1fr;
+			}
+
+			.post-card {
+				width: 100%;
+				height: 420px;
 			}
 		}
 	}
@@ -164,7 +224,11 @@
 			.post-card {
 				width: 100%;
 				margin-bottom: 0;
-				height: 420px;
+				height: 430px;
+			}
+
+			.swiper-pagination-bullet {
+				background: rgba(0, 0, 0, 0.25);
 			}
 
 			.swiper-pagination-bullet-active {

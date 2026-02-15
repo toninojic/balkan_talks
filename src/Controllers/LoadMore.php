@@ -49,13 +49,7 @@ class LoadMore
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                if ($layout === 'featured') {
-                    echo '<div class="post-card-slot is-secondary">';
-                    get_template_part('loop-templates/content', 'post-loop');
-                    echo '</div>';
-                } else {
-                    get_template_part('loop-templates/content', 'post-loop');
-                }
+                get_template_part('loop-templates/content', 'post-loop');
             }
             wp_reset_postdata();
         }

@@ -12,40 +12,48 @@ if (!in_array($layout, $allowedLayouts, true)) {
 
 $postContainerClasses = 'post-container post-container--' . $layout;
 $wrapperClasses = 'post-wrapper post-wrapper--' . $layout;
-$showLoadMore = $layout !== 'swiper' && $query->found_posts > $postsPerPage;
+$showLoadMore = in_array($layout, ['default', 'stacked'], true) && $query->found_posts > $postsPerPage;
 ?>
 <div class="<?php echo esc_attr($wrapperClasses); ?>">
     <div class="<?php echo esc_attr($postContainerClasses); ?>" id="post-container" data-layout="<?php echo esc_attr($layout); ?>">
 
         <?php if ($layout === 'swiper') : ?>
             <div class="swiper-wrapper">
-        <?php endif; ?>
-
-        <?php
-        $postIndex = 0;
-        while ($query->have_posts()) :
-            $query->the_post();
-
-            if ($layout === 'featured') {
-                $cardClass = $postIndex === 0 ? ' is-featured' : ' is-secondary';
-                echo '<div class="post-card-slot' . esc_attr($cardClass) . '">';
-                get_template_part('loop-templates/content', 'post-loop');
-                echo '</div>';
-            } elseif ($layout === 'swiper') {
-                echo '<div class="swiper-slide">';
-                get_template_part('loop-templates/content', 'post-loop');
-                echo '</div>';
-            } else {
-                get_template_part('loop-templates/content', 'post-loop');
-            }
-
-            $postIndex++;
-        endwhile;
-        ?>
-
-        <?php if ($layout === 'swiper') : ?>
+                <?php while ($query->have_posts()) : $query->the_post(); ?>
+                    <div class="swiper-slide">
+                        <?php get_template_part('loop-templates/content', 'post-loop'); ?>
+                    </div>
+                <?php endwhile; ?>
             </div>
             <div class="swiper-pagination"></div>
+        <?php elseif ($layout === 'featured') : ?>
+            <?php
+            $cards = [];
+            while ($query->have_posts()) :
+                $query->the_post();
+                ob_start();
+                get_template_part('loop-templates/content', 'post-loop');
+                $cards[] = ob_get_clean();
+            endwhile;
+            ?>
+
+            <div class="featured-hero">
+                <div class="featured-side featured-side--left"><?php echo isset($cards[1]) ? $cards[1] : ''; ?></div>
+                <div class="featured-main"><?php echo isset($cards[0]) ? $cards[0] : ''; ?></div>
+                <div class="featured-side featured-side--right"><?php echo isset($cards[2]) ? $cards[2] : ''; ?></div>
+            </div>
+
+            <?php if (count($cards) > 3) : ?>
+                <div class="featured-more">
+                    <?php for ($i = 3; $i < count($cards); $i++) : ?>
+                        <?php echo $cards[$i]; ?>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+        <?php else : ?>
+            <?php while ($query->have_posts()) : $query->the_post(); ?>
+                <?php get_template_part('loop-templates/content', 'post-loop'); ?>
+            <?php endwhile; ?>
         <?php endif; ?>
 
     </div>
