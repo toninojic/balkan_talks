@@ -2,11 +2,11 @@
 
 namespace BalkanTalks;
 
-use BalkanTalks\Controllers\LoadMore;
-use BalkanTalks\Controllers\ThemeSupportController;
-use BalkanTalks\Controllers\Enqueue;
 use BalkanTalks\Controllers\CustomHooks;
+use BalkanTalks\Controllers\Enqueue;
+use BalkanTalks\Controllers\LoadMore;
 use BalkanTalks\Controllers\Redirections;
+use BalkanTalks\Controllers\ThemeSupportController;
 use BalkanTalks\Modals\UserMetaFields;
 use BalkanTalks\Shortcodes\PostsLoop;
 use BalkanTalks\Shortcodes\UserProfiles;
@@ -17,10 +17,19 @@ class MainLoader
         $this->init();
     }
 
-    public function init() {
+    public function init(): void {
+        $this->registerShortcodes();
+        $this->registerControllers();
+    }
+
+    private function registerShortcodes(): void
+    {
         new UserProfiles();
         new PostsLoop();
+    }
 
+    private function registerControllers(): void
+    {
         ThemeSupportController::getInstance();
         Enqueue::getInstance();
         CustomHooks::getInstance();

@@ -1,37 +1,41 @@
 <?php
+
 namespace BalkanTalks\Shortcodes;
+
+use BalkanTalks\Models\UserProfilesModel;
+use BalkanTalks\Views\TemplateRenderer;
 
 class UserProfiles
 {
+    private UserProfilesModel $userProfilesModel;
+
+    private TemplateRenderer $templateRenderer;
+
     public function __construct() {
+        $this->userProfilesModel = new UserProfilesModel();
+        $this->templateRenderer = new TemplateRenderer();
+
         add_shortcode('user_profiles', [$this, 'displayUserProfiles']);
     }
 
-    public function displayUserProfiles($atts) {
-        $atts = shortcode_atts(array(
+    /**
+     * @param array<string, mixed> $atts
+     */
+    public function displayUserProfiles($atts): string {
+        $atts = shortcode_atts([
             'role' => 'staff',
-        ), $atts, 'user_profiles');
+        ], $atts, 'user_profiles');
 
-        $mainStaffUsers = get_users(array(
-            'meta_key' => 'user_role',
-            'meta_value' => 'main_staff',
-        ));
+        $users = $this->userProfilesModel->getUsersByRole((string) $atts['role']);
 
-        $shortcodeRoleUsers = get_users(array(
-            'meta_key' => 'user_role',
-            'meta_value' => $atts['role'],
-        ));
+        $content = '<div class="user-profiles-accordion">';
 
-        $allUsers = array_merge($mainStaffUsers, $shortcodeRoleUsers);
+        foreach ($users as $user) {
+            $content .= $this->templateRenderer->renderTemplatePart('global-templates/content', 'user', ['user' => $user]);
+        }
 
-        ob_start();
-        ?>
-        <div class="user-profiles-accordion">
-            <?php foreach ($allUsers as $user) : ?>
-                <?php get_template_part('global-templates/content', 'user', ['user' => $user]); ?>
-            <?php endforeach; ?>
-        </div>
-        <?php
-        return ob_get_clean();
+        $content .= '</div>';
+
+        return $content;
     }
 }
