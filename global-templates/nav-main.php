@@ -27,10 +27,3 @@
         </nav>
     </div>
 </header>
-
-
-<?php 
-if ( ! is_front_page() ) {
-    yoast_breadcrumb('<nav id="breadcrumbs"><div class="container">', '<div></div></nav>');
-}
-?>

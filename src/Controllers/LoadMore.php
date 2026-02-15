@@ -20,11 +20,12 @@ class LoadMore
         $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
         $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
         $tag = isset($_POST['tag']) ? sanitize_text_field($_POST['tag']) : '';
+        $postsPerPage = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 6;
 
         $args = [
             'offset' => $offset,
             'order' => 'DESC',
-            'posts_per_page' => 6,
+            'posts_per_page'  => $postsPerPage,
             'post_status' => 'publish',
             'post_type' => 'post',
         ];

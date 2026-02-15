@@ -21,7 +21,8 @@
 	.in-content-search-wrapper {
 		margin-bottom: 2rem;
 		padding: 1rem;
-		background-color: #f9f9f9;
+		background-color: $color-5;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, .05);
 		border: 1px solid #ddd;
 		border-radius: 8px;
 
@@ -94,18 +95,15 @@
 		a {
 			display: inline-block;
 			padding: 0.4rem 0.8rem;
-			background-color: #f0f0f0;
-			border: 1px solid #ccc;
+			background-color: $color-4;
 			border-radius: 20px;
 			font-size: 0.9rem;
-			color: #333;
+			color: $color-5;
 			text-decoration: none;
 			transition: all 0.2s ease-in-out;
 
 			&:hover {
-			background-color: #333;
-			color: #fff;
-			border-color: #333;
+				background-color: #173506;
 			}
 		}
 	}

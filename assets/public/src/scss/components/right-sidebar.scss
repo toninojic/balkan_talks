@@ -1,6 +1,7 @@
 .sidebar {
 	width: 33%;
 	position: relative;
+	color: $color-2 !important;
 
 	@media (max-width: 992px) {
 		width: 100%;

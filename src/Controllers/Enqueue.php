@@ -15,7 +15,7 @@ class Enqueue
     }
 
     public function registerStylesAndScripts() {
-        wp_register_style('main-style', get_template_directory_uri() . '/assets/public/dist/css/style.css', [], '1.2', '');
+        wp_register_style('main-style', get_template_directory_uri() . '/assets/public/dist/css/style.css', [], '2.0', '');
 
         wp_enqueue_style('main-style');
 

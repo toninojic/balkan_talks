@@ -16,16 +16,12 @@ body {
 	}
 }
 
-main {
-	flex: 1;
-}
-
 // color variables
-$color-1: #89b1d4;
-$color-2: #f7f5a2;
-$color-3: #ee8589;
-$color-4: #d4ac89;
-$color-5: #4d6275;
+$color-1: #ff875c;
+$color-2: #472e57;
+$color-3: #ff4c05;
+$color-4: #1c4a00;
+$color-5: #f5eddf;
 $success: #4CAF50;
 $white: #fff;
 $black: #000;
@@ -33,6 +29,25 @@ $overlay: rgba(18, 21, 25, 0.98);
 
 // spacing variables
 $border-radius: 8px;
+
+main {
+	flex: 1;
+	background-color: $color-5;
+}
+
+.custom-contact-form input[type="submit"] {
+	background-color: $color-4 !important;
+	color: $color-5 !important;
+}
+
+.comments-area   {
+	.comment-list {
+		.comment {
+			padding: 10px;
+    		box-shadow: 0 10px 40px rgba(0, 0, 0, .05);
+		}
+	}
+}
 
 .load-more-btn {
 	padding: 8px 12px;
@@ -45,17 +60,17 @@ $border-radius: 8px;
 
 	&:hover {
 		cursor: pointer;
-		background-color: #9a8069;
+		background-color: #173506;
 		box-shadow: 7px 7px 2px 1px rgba(0, 0, 0, 0.071);
 	}
 }
 
 a {
-	color: $color-4;
+	color: $color-3;
 	text-decoration: none;
 
 	&:hover {
-		color: #b4977e;
+		color: #a7421a;
 	}
 }
 

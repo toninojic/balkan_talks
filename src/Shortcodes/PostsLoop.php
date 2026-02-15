@@ -13,13 +13,16 @@ class PostsLoop
         $atts = shortcode_atts([
             'category' => '',
             'tag' => '',
+            'posts_per_page' => 6,
         ], $atts, 'custom_category_loop');
+
+        $postsPerPage = intval($atts['posts_per_page']);
 
         $args = [
             'post_type' => 'post',
             'order' => 'DESC',
             'offset' => 0,
-            'posts_per_page' => 6,
+            'posts_per_page' => $postsPerPage,
         ];
 
         if (!empty($atts['tag'])) {
@@ -38,6 +41,7 @@ class PostsLoop
                 'query' => $query,
                 'cat' => $atts['category'],
                 'tag' => $atts['tag'],
+                'posts_per_page' => $postsPerPage,
             ]);
             wp_reset_postdata();
             $postsLoopContent = ob_get_clean();
@@ -45,4 +49,5 @@ class PostsLoop
 
         return $postsLoopContent;
     }
+
 }

@@ -1,6 +1,7 @@
 #header {
 	background-color: $color-5;
 	z-index: 100;
+	border-bottom: 1px solid $color-3;
 
 	.container {
 		display: flex;
@@ -10,9 +11,13 @@
 		position: relative;
 
 		a {
-			color: $white;
+			color: $color-3;
 			text-decoration: none;
 			text-transform: uppercase;
+
+			@media screen and (max-width: 768px) {
+				color: $color-5;
+			}
 		}
 
 		.logo {
@@ -26,19 +31,13 @@
 
 				@media screen and (min-width: 768px) {
 					font-size: 20px;
-					font-weight: 700;
+					font-weight: 600;
 				}
 			}
 
 			img {
-				width: 50px;
-				height: 50px;
-				transition: 2s;
-
-				&:hover {
-					transform: rotate(360deg);
-					transition: 2s;
-				}
+				width: 75px;
+				height: auto;
 			}
 		}
 
@@ -62,7 +61,7 @@
 					left: 0;
 					width: 0;
 					height: 2px;
-					background-color: $white;
+					background-color: $color-3;
 					transition: width 0.4s ease;
 				}
 		
@@ -81,7 +80,7 @@
 					left: 0;
 					width: 100%;
 					height: 2px;
-					background-color: $white;
+					background-color: $color-3;
 				}
 			}
 
@@ -113,10 +112,10 @@
 				position: absolute;
 				top: 100%;
 				left: 0;
-				background-color: $overlay;
+				background-color: $color-5;
 				padding: 0 20px 10px 20px;
 				list-style: none;
-				border-radius: 0 0 8px 8px;
+				box-shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.3);
 
 				li {
 					display: flex;
@@ -227,7 +226,7 @@
 .hamburger .line{
 	width: 30px;
 	height: 2px;
-	background-color: $white;
+	background-color: $color-3;
 	display: block;
 	margin: 8px auto;
 	-webkit-transition: all 0.3s ease-in-out;

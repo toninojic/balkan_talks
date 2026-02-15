@@ -1,6 +1,6 @@
 footer {
 	display: flex;
-	background-color: $color-3;
+	background-color: $color-1;
 	color: $white;
 	padding: 20px;
 
@@ -9,6 +9,10 @@ footer {
 		justify-content: center;
 		align-items: center;
 		gap: 30px;
+	}
+
+	p {
+		color: #57506d;
 	}
 
 	@media screen and (max-width: 768px) {
