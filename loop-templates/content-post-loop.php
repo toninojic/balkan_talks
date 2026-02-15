@@ -6,10 +6,11 @@
     </div>
 
     <div class="post-card-description">
-        <a href="<?php echo esc_url(get_permalink()); ?>">
+        <span class="post-card-meta"><?php echo esc_html(get_the_date('d M Y')); ?></span>
+        <a href="<?php echo esc_url(get_permalink()); ?>" class="post-card-title-link">
             <h3><?php the_title(); ?></h3>
         </a>
         <p class="post-card-content"><?php echo wp_strip_all_tags(strip_shortcodes(get_the_content())); ?></p>
+        <span class="post-card-author"><?php echo esc_html(get_the_author()); ?></span>
     </div>
 </div>
-

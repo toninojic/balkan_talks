@@ -1,53 +1,58 @@
 <?php
+
 namespace BalkanTalks\Shortcodes;
 
-use WP_Query;
+use BalkanTalks\Models\PostQueryModel;
+use BalkanTalks\Views\TemplateRenderer;
 
 class PostsLoop
 {
+    private PostQueryModel $postQueryModel;
+
+    private TemplateRenderer $templateRenderer;
+
     public function __construct() {
+        $this->postQueryModel = new PostQueryModel();
+        $this->templateRenderer = new TemplateRenderer();
+
         add_shortcode('custom_category_loop', [$this, 'displayCategoryLoop']);
     }
 
-    public function displayCategoryLoop($atts) {
+    /**
+     * @param array<string, mixed> $atts
+     */
+    public function displayCategoryLoop($atts): string {
         $atts = shortcode_atts([
             'category' => '',
             'tag' => '',
             'posts_per_page' => 6,
+            'layout' => 'default',
         ], $atts, 'custom_category_loop');
 
-        $postsPerPage = intval($atts['posts_per_page']);
+        $postsPerPage = max(1, intval($atts['posts_per_page']));
+        $layout = $this->postQueryModel->sanitizeLayout((string) $atts['layout']);
 
-        $args = [
-            'post_type' => 'post',
-            'order' => 'DESC',
-            'offset' => 0,
+        $query = $this->postQueryModel->query([
+            'category' => $atts['category'],
+            'tag' => $atts['tag'],
             'posts_per_page' => $postsPerPage,
-        ];
+            'offset' => 0,
+        ]);
 
-        if (!empty($atts['tag'])) {
-            $args['tag'] = sanitize_title($atts['tag']);
-        } elseif (!empty($atts['category']) && $atts['category'] !== 'uncategorized') {
-            $args['category_name'] = sanitize_title($atts['category']);
+        if (!$query->have_posts()) {
+            return '';
         }
 
-        $postsLoopContent = '';
+        $content = $this->templateRenderer->renderTemplatePart('global-templates/content', 'posts', [
+            'query' => $query,
+            'cat' => $atts['category'],
+            'tag' => $atts['tag'],
+            'posts_per_page' => $postsPerPage,
+            'layout' => $layout,
+        ]);
 
-        $query = new WP_Query($args);
+        wp_reset_postdata();
 
-        if ($query->have_posts()) {
-            ob_start();
-            get_template_part('global-templates/content', 'posts', [
-                'query' => $query,
-                'cat' => $atts['category'],
-                'tag' => $atts['tag'],
-                'posts_per_page' => $postsPerPage,
-            ]);
-            wp_reset_postdata();
-            $postsLoopContent = ob_get_clean();
-        }
-
-        return $postsLoopContent;
+        return $content;
     }
-
 }

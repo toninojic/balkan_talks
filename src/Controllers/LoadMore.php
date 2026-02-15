@@ -2,53 +2,45 @@
 
 namespace BalkanTalks\Controllers;
 
+use BalkanTalks\Models\PostQueryModel;
 use BalkanTalks\Traits\SingletonTrait;
-use WP_Query;
+use BalkanTalks\Views\TemplateRenderer;
 
 class LoadMore
 {
     use SingletonTrait;
 
+    private PostQueryModel $postQueryModel;
+
+    private TemplateRenderer $templateRenderer;
+
     public function __construct() {
+        $this->postQueryModel = new PostQueryModel();
+        $this->templateRenderer = new TemplateRenderer();
+
         add_action('wp_ajax_load_more_posts', [$this, 'loadMorePosts']);
         add_action('wp_ajax_nopriv_load_more_posts', [$this, 'loadMorePosts']);
     }
 
     public function loadMorePosts() {
-        // check_ajax_referer('load_more_posts_nonce', 'security');
-
-        $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
-        $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
-        $tag = isset($_POST['tag']) ? sanitize_text_field($_POST['tag']) : '';
-        $postsPerPage = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 6;
-
-        $args = [
-            'offset' => $offset,
-            'order' => 'DESC',
-            'posts_per_page'  => $postsPerPage,
-            'post_status' => 'publish',
-            'post_type' => 'post',
+        $filters = [
+            'offset' => $_POST['offset'] ?? 0,
+            'category' => $_POST['category'] ?? '',
+            'tag' => $_POST['tag'] ?? '',
+            'posts_per_page' => $_POST['posts_per_page'] ?? 6,
         ];
 
-        if ($tag !== 'null') {
-            $args['tag'] = $tag;
-        } elseif (!empty($category) && $category !== 'uncategorized') {
-            $args['category_name'] = $category;
-        }
+        $query = $this->postQueryModel->query($filters);
 
-        $query = new WP_Query($args);
-
-        ob_start();
+        $result = '';
 
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                get_template_part('loop-templates/content', 'post-loop');
+                $result .= $this->templateRenderer->renderTemplatePart('loop-templates/content', 'post-loop');
             }
             wp_reset_postdata();
         }
-
-        $result = ob_get_clean();
 
         wp_send_json_success($result);
     }
