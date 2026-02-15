@@ -3,10 +3,9 @@ $query = $args['query'];
 $categorySlug =  $args['cat'];
 $tagSlug = $args['tag'];
 $postsPerPage = isset($args['posts_per_page']) ? intval($args['posts_per_page']) : 6;
-$contextSlug = !empty($categorySlug) ? sanitize_html_class($categorySlug) : (!empty($tagSlug) ? sanitize_html_class($tagSlug) : 'default');
 
 ?>
-<div class="post-wrapper post-wrapper--<?php echo esc_attr($contextSlug); ?>">
+<div class="post-wrapper">
     <div class="post-container" id="post-container">
 
         <?php  while ($query->have_posts()) : $query->the_post();
