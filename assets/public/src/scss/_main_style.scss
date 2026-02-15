@@ -57,6 +57,7 @@ main {
 	border: none;
 	border-radius: $border-radius;
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	margin-top: 25px;
 
 	&:hover {
 		cursor: pointer;
