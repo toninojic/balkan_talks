@@ -1,18 +1,21 @@
 footer {
 	display: flex;
-	background-color: $color-1;
+	background: linear-gradient(135deg, #ff875c 0%, #ff6a37 40%, #ff4c05 100%);
 	color: $white;
-	padding: 20px;
+	padding: 24px 20px;
+	box-shadow: 0 -18px 40px rgba(71, 46, 87, 0.14);
 
 	.container {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 30px;
+		gap: 24px;
+	flex-wrap: wrap;
 	}
 
 	p {
-		color: #57506d;
+		color: #3b2748;
+	margin: 0;
 	}
 
 	@media screen and (max-width: 768px) {

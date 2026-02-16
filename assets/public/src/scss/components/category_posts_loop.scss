@@ -3,13 +3,13 @@
 }
 
 .post-wrapper {
-	margin: 30px auto;
+	margin: 34px auto 46px;
 
 	.post-container {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: start;
-		gap: 28px;
+		gap: 24px;
 
 		@media screen and (max-width: 480px) {
 			justify-content: center;
@@ -27,11 +27,13 @@
 			border-radius: 14px;
 			border: 1px solid rgba(0, 0, 0, 0.08);
 			box-shadow: 0 16px 40px rgba(0, 0, 0, .08);
-			transition: transform .25s ease, box-shadow .25s ease;
+			transform-origin: center;
+			transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 
 			&:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 22px 45px rgba(0, 0, 0, .14);
+				transform: translateY(-8px);
+				box-shadow: 0 28px 55px rgba(0, 0, 0, .16);
+				border-color: rgba(255, 76, 5, 0.32);
 			}
 
 			@media screen and (max-width: 1200px) {
@@ -48,7 +50,7 @@
 			}
 
 			&-description {
-				padding: 14px;
+				padding: 16px;
 				display: flex;
 				flex-direction: column;
 				gap: 8px;
@@ -56,11 +58,14 @@
 				h3 {
 					color: $color-2;
 					margin: 0;
-					line-height: 1.28;
-					font-size: 30px;
+					line-height: 1.2;
+					font-size: 28px;
 
 					@media screen and (max-width: 1200px) {
 						font-size: 24px;
+					}
+					@media (min-width: 600px) and (max-width: 1200px) {
+						font-size: 18px;
 					}
 				}
 
@@ -87,6 +92,9 @@
 					text-overflow: ellipsis;
 					line-height: 1.45;
 					font-size: 16px;
+					@media (min-width: 600px) and (max-width: 1200px) {
+						font-size: 12px;
+					}
 				}
 			}
 
@@ -121,7 +129,7 @@
 						position: absolute;
 						width: 100%;
 						height: 100%;
-						background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.1) 100%);
+						background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(71, 46, 87, 0.22) 100%);
 					}
 
 					img {
@@ -235,4 +243,13 @@
 			}
 		}
 	}
+}
+
+
+.post-wrapper--default .post-card:nth-child(odd) {
+	transition-delay: .04s;
+}
+
+.post-wrapper--default .post-card:nth-child(even) {
+	transition-delay: .08s;
 }
