@@ -42,7 +42,8 @@ if (!$author && get_query_var('author')) {
 
                     <section class="author-recent-posts">
                         <h2>Latest from <?php echo esc_html($author->display_name); ?></h2>
-                        <div class="author-posts-grid">
+                        <div class="post-wrapper post-wrapper--default author-posts-wrapper">
+                            <div class="post-container post-container--default author-posts-grid" data-layout="default">
                             <?php
                             $author_posts_query = new WP_Query([
                                 'post_type' => 'post',
@@ -63,6 +64,7 @@ if (!$author && get_query_var('author')) {
                                 <?php
                             endif;
                             ?>
+                            </div>
                         </div>
                     </section>
                 <?php else : ?>
