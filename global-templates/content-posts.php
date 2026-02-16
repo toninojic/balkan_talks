@@ -12,7 +12,7 @@ if (!in_array($layout, $allowedLayouts, true)) {
 
 $postContainerClasses = 'post-container post-container--' . $layout;
 $wrapperClasses = 'post-wrapper post-wrapper--' . $layout;
-$showLoadMore = in_array($layout, ['default', 'stacked'], true) && $query->found_posts > $postsPerPage;
+$showLoadMore = in_array($layout, ['default', 'stacked', 'swiper'], true) && $query->found_posts > $postsPerPage;
 ?>
 <div class="<?php echo esc_attr($wrapperClasses); ?>">
     <div class="<?php echo esc_attr($postContainerClasses); ?>" id="post-container" data-layout="<?php echo esc_attr($layout); ?>">
